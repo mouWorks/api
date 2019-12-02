@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 BRANCH := $(shell git name-rev --name-only HEAD)
-ENDPOINT := src/main.ts
+ENDPOINT := dist/main.js
 SERVICE_NAME := api
 PORT := 3005
 CONFIG := ecosystem.config.js

@@ -1,7 +1,7 @@
 module.exports = {
     apps : [{
         name   : "api",
-        script : "src/main.ts"
+        script : "dist/main.js"
     }],
     env:
         {

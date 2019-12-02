@@ -89,7 +89,7 @@ jobs:
 
       - slack/status:
           fail_only: true
-          failure_message: "Dcard CI fail !!"
+          failure_message: "Api Deploy fail !!"
           webhook: ${SLACK_WEBHOOK} # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
 
       - slack/notify:
