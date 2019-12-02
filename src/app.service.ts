@@ -7,7 +7,7 @@ export class AppService {
   }
 
   getStyles(): string {
-    return 'Listing all the styles';
+    return 'Listing all the desired Styles';
   }
 
 

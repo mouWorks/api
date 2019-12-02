@@ -70,6 +70,11 @@ jobs:
             echo -e "DB_USER=${DB_USER}\nDB_PASS=${DB_PASS}\nDB_NAME=${DB_NAME}\nCHATROOM_ID=${CHATROOM_ID}\n}" > .env
 
       - run:
+          name: ComileJS file on the fly
+          command:
+            npm run build
+
+      - run:
           name: Packing the codes
           command: tar -czf /tmp/${ZIPFILE_NAME} .
 
