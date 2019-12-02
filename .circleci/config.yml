@@ -107,3 +107,4 @@ workflows:
             branches:
               only:
                 - master
+                - nest_master

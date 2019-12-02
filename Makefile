@@ -1,19 +1,13 @@
 #!/usr/bin/make -f
 BRANCH := $(shell git name-rev --name-only HEAD)
-ENDPOINT := server.js
+ENDPOINT := src/main.ts
 SERVICE_NAME := api
 PORT := 3005
 CONFIG := ecosystem.config.js
 
-.PHONY: test
-
 build:
 	@echo ">>> Builing packages"
 	npm install
-
-# html-pack:
-# 	@echo ">>> Generate Static Html"
-# 	pug views/pug --out static/html
 
 restart: stop start
 	@echo ">>> Restart NodeJS Service by PM2"
@@ -25,37 +19,22 @@ reload:
 
 stop:
 	@echo ">>> Stopping Server"
-	NODE_PORT=$(PORT) pm2 stop $(ENDPOINT)
+	pm2 stop $(SERVICE_NAME)
 
 start:
 	@echo ">>> Starting Server"
-	NODE_PORT=$(PORT) pm2 start $(ENDPOINT) --name $(SERVICE_NAME)
+	npm run pm2
 
 local:
 	@echo ">>> Running Local env"
-	nodemon $(ENDPOINT)
+	npm run start:dev
 
 pull:
 	@echo ">>> Pull Code on Current branch [$(BRANCH)]"
 	git pull origin $(BRANCH) --rebase
 
-push: test
+push:
 	@echo ">>> Current branch [$(BRANCH)] Pushing Code"
 	git push origin $(BRANCH)
-
-test:
-	node --check $(ENDPOINT)
-
-# Migration
-migrate:
-	node node_modules/db-migrate/bin/db-migrate up
-
-# CircleCI Env
-migrate-ci:
-	node node_modules/db-migrate/bin/db-migrate up --config database.json -e circleci
-
-# Migration-Production
-migrate-prod:
-	node node_modules/db-migrate/bin/db-migrate up --config database.json -e prod
 
 
