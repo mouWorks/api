@@ -9,4 +9,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('/styles/v1')
+  getStyles(): string {
+    return this.appService.getStyles();
+  }
 }
