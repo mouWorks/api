@@ -1,18 +1,23 @@
 import "reflect-metadata";
 import { Injectable } from '@nestjs/common';
-// import { createConnection } from "typeorm";
+import { Repository, UpdateResult, DeleteResult } from "typeorm";
+import { InjectRepository } from '@nestjs/typeorm';
 import {getManager, getRepository, createConnection, getConnectionManager} from "typeorm";
 import { Style } from "./entity/Style";
 
-
 @Injectable()
 export class AppService {
+
   getHello(): string {
     return 'Hello NestJS @3005 !';
   }
 
   // getStyles(): string {
   //   return 'Listing all the desired Styles';
+  // }
+
+  // async delete(id): Promise<DeleteResult> {
+  //   return await this.StyleRepository.delete(id);
   // }
 
   async getStyleById(id): Promise<Object>{
