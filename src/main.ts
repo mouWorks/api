@@ -9,10 +9,10 @@ async function bootstrap() {
       .setTitle('Styles Api')
       .setDescription('Api doc for Styles')
       .setVersion('1.0')
-      // .addTag('styles')
+      .addTag('style')
       .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('doc', app, document);
+  SwaggerModule.setup('doc/style', app, document);
 
   await app.listen(3005);
 }
