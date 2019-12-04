@@ -29,7 +29,7 @@ jobs:
 
       - slack/notify:
           title: "[Npm Installing] @ api.m0u.work"
-          message: "CircleCI Notify"
+          message: "[Api] Npm Installing"
           color: "#42e2f4" # Optional: Assign custom colors for each notification
           webhook: ${SLACK_WEBHOOK} # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
 
@@ -56,20 +56,12 @@ jobs:
 #          command: make migrate
 
 #      - run:
-#          name: Install Mocha for Nodejs Testing
-#          command: sudo npm install mocha -g
-
-#      - run:
 #          name: Install MySQL CLI; Import dummy data; run an example query
 #          command: |
 #            sudo apt-get update
 #            sudo apt install mysql-client
 #            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}';"
 #            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';"
-
-#      - run:
-#          name: Run the Tests!
-#          command: make test
 
       - run:
           name: Eject .Env file
@@ -85,7 +77,7 @@ jobs:
       # Production Env
       - run:
           name: Use jQ to eject current image build number
-          command: jq '.username = "env.DB_USER" | .password = "env.DB_PASS"' ormconfig.json >  ormconfigPROD.json
+          command: jq '.username = "' + env.DB_USER +'" | .password = "' + env.DB_PASS + '"' ormconfig.json >  ormconfigPROD.json
 #          command: jq '.username = "mouwang/jobhunter-nginx-php:0.1."'+'env.DB_USER + '  ormconfig.json >  ormconfigProd.json
 
 
@@ -114,7 +106,7 @@ jobs:
 
       - slack/notify:
           title: "[Deploying...] @ api.m0u.work"
-          message: "CircleCI Notify"
+          message: "[Api] Deploying"
           color: "#42e2f4" # Optional: Assign custom colors for each notification
           webhook: ${SLACK_WEBHOOK} # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
 
@@ -143,7 +135,7 @@ jobs:
 
       - slack/notify:
           title: "NodeJS Deploy完成 @ api.m0u.work"
-          message: "Deployed by CircleCI"
+          message: "[Api] Complete!"
           color: "#42e2f4" # Optional: Assign custom colors for each notification
           webhook: ${SLACK_WEBHOOK} # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
 
