@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { StyleController } from './style.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Style } from './style.entity';
+import { Style } from '../entity/style.entity';
 import { StyleRepository } from './style.repository';
 
 @Module({

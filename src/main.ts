@@ -9,7 +9,7 @@ async function bootstrap() {
       .setTitle('Styles Api')
       .setDescription('Api doc for Styles')
       .setVersion('1.0')
-      .addTag('style')
+      // .addTag('styles')
       .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('doc/style', app, document);

@@ -1,4 +1,4 @@
-import { Style } from './style.entity';
+import { Style } from '../entity/style.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { StyleDto } from './interfaces/styleDto';
 
