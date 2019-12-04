@@ -24,7 +24,7 @@ export class AppController {
     // console.log(data.username);
 
     // return '123124';
-    return `使用者a:${userDto.username}已建立`;
+    return `使用者:${userDto.username}已建立`;
     // return 'This is post';
     // return this.appService.getHello();
   }
