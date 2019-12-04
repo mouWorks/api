@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { StyleDto } from './interfaces/styleDto';
 import { StyleRepository} from "./style.repository";
 import {StyleDTOValidationPipe} from "../shared/pipes/StyleDTOValidationPipe";
+import {ApiCreatedResponse, ApiOkResponse} from "@nestjs/swagger";
 
 @Controller('styles/v1')
 export class StyleController {
@@ -25,6 +26,7 @@ export class StyleController {
     }
 
     //R - FindAll
+    @ApiCreatedResponse({description:'User Created'})
     @Get()
     findAll(){
         return this.styleRepository.find();
