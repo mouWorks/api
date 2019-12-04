@@ -60,9 +60,9 @@ jobs:
 #            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}';"
 #            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';"
 
-      - run:
-          name: Run the Tests!
-          command: make test
+#      - run:
+#          name: Run the Tests!
+#          command: make test
 
       - run:
           name: Eject .Env file
