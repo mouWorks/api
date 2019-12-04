@@ -3,7 +3,7 @@ import {MigrationInterface, QueryRunner, Table, TableIndex} from "typeorm";
 export class Style1575473721416 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
 
-        let tableName = 'Style';
+        let tableName = 'style';
         let indexName = 'IDX_STYLE';
 
         await queryRunner.createTable(new Table({
@@ -41,7 +41,7 @@ export class Style1575473721416 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<any> {
 
-        let tableName = 'Style';
+        let tableName = 'style';
         let indexName = 'IDX_STYLE';
 
         const table = await queryRunner.getTable(tableName);
