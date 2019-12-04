@@ -19,6 +19,36 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!');
+      .expect('Hello NestJS @3005 !');
   });
+
+  it('/ (GET) Style/v1/2', () => {
+
+    let resultJson = {
+      "username": "測試2",
+      "email": "test2@test.com"
+    };
+
+    return request(app.getHttpServer())
+        .get('/styles/v1/2')
+        .expect(200)
+        .expect(resultJson);
+  });
+
+
+  it('/ (GET) Style/v1/3', () => {
+
+    let resultJson = {
+      "username": "測試3",
+      "email": "test3@test.com"
+    };
+
+    return request(app.getHttpServer())
+        .get('/styles/v1/3')
+        .expect(200)
+        .expect(resultJson);
+  });
+
+
+
 });
