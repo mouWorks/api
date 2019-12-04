@@ -1,7 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
-export class User {
+export class Style {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -13,8 +13,8 @@ export class User {
     desc: string;
 
     @Column()
-    descChinese: number;
+    descChinese: string;
 
-    @Column()
+    @Column({ default: false })
     isDeleted: boolean;
 }

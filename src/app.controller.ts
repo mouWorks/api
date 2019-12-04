@@ -29,6 +29,11 @@ export class AppController {
     // return this.appService.getHello();
   }
 
+  @Get('/test')
+  testCreate(){
+    console.log('@AppController');
+    return this.appService.createStyles();
+  }
 
   //R
   @Get('/styles/v1')
