@@ -7,7 +7,7 @@ CONFIG := ecosystem.config.js
 
 build:
 	@echo ">>> Builing packages"
-	npm install
+	npm i && npm run build
 
 restart: stop start
 	@echo ">>> Restart NodeJS Service by PM2"
