@@ -92,6 +92,10 @@ jobs:
 # Should Run Jest Test Here
 
       - run:
+          name: Install Jest for Nodejs Testing
+          command: sudo npm install jest -g
+
+      - run:
           name: Run Jest Test
           command: jest
 
