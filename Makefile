@@ -35,8 +35,11 @@ pull:
 	@echo ">>> Pull Code on Current branch [$(BRANCH)]"
 	git pull origin $(BRANCH) --rebase
 
-push:
+push: validate-yaml
 	@echo ">>> Current branch [$(BRANCH)] Pushing Code"
 	git push origin $(BRANCH)
 
+validate-yaml:
+	@echo ">>> Check if your Yaml is Valid"
+	circleci config validate
 
