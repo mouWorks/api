@@ -1,6 +1,7 @@
 import { Style } from './style.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { StyleDto } from './interfaces/styleDto';
+import {Get} from "@nestjs/common";
 
 @EntityRepository(Style)
 export class StyleRepository extends Repository<Style> {

@@ -9,6 +9,13 @@ export class StyleController {
         @InjectRepository(StyleRepository) private readonly styleRepository: StyleRepository,
     ) {}
 
+    //Test
+    @Get('/test')
+    getHello(){
+        // return this.styleRepository.getHello();
+        return 'Hello StyleController';
+    }
+
     //C
     @Post()
     create(@Body() styleDto: StyleDto) {
