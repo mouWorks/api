@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import {UserDTOValidationPipe} from "../../shared/UserDTOValidationPipe";
+import {UserDTOValidationPipe} from "./pipes/UserDTOValidationPipe";
 
 @Module({
     providers: [

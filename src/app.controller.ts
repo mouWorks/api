@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, UsePipes} from '@nestjs/common';
 import { AppService } from './app.service';
-import { UserDTOValidationPipe } from "../shared/UserDTOValidationPipe";
+import { UserDTOValidationPipe } from "./shared/pipes/UserDTOValidationPipe";
 import { UserDTO} from "./UserDTO";
 
 @Controller()
