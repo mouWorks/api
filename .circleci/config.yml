@@ -77,8 +77,10 @@ jobs:
       # Production Env
       - run:
           name: Use jQ to eject current image build number
-          command: jq '.username = "' + env.DB_USER +'" | .password = "' + env.DB_PASS + '"' ormconfig.json >  ormconfigPROD.json
+          command: jq '.username = ${DB_USER}  | .password = ${DB_PASS} ' ormconfig.json >  ormconfigPROD.json
 #          command: jq '.username = "mouwang/jobhunter-nginx-php:0.1."'+'env.DB_USER + '  ormconfig.json >  ormconfigProd.json
+
+#  jq '.username =  12313 | .password = 2015 ' ormconfig.json >  ormconfigPROD.json
 
 
 # Should Run Jest Test Here
