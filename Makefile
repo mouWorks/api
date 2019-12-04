@@ -5,6 +5,8 @@ SERVICE_NAME := api
 PORT := 3005
 CONFIG := ecosystem.config.js
 
+.PHONY: build
+
 build:
 	@echo ">>> Builing packages"
 	npm i && npm run build
