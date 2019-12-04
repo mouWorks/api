@@ -8,5 +8,5 @@
 
 ### ApiDoc
 
-* [Swagger] (https://api.m0u.works/api/doc) 
+* [SwaggerApi](https://api.m0u.work/doc/style) 
 
