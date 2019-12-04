@@ -36,18 +36,14 @@ export class AppController {
   }
 
   //R
-  @Get('/styles/v1')
-  getStyles(): string {
-    return this.appService.getStyles();
-  }
+  // @Get('/styles/v1')
+  // getStyles(): string {
+  //   return this.appService.getStyles();
+  // }
 
   @Get('/styles/v1/:id')
   getUserById(@Param('id') id){
-    const userFromMemory = this.inMemoryUsers.find((user) => user.id === parseInt(id, 10)); //解析後都是字串，要使用parseInt傳成number
-    const resUser = new UserDTO();
-    resUser.username = userFromMemory.username;
-    resUser.email = userFromMemory.email;
-    return resUser;
+    return this.appService.getStyleById(id);
   }
 
   //U
