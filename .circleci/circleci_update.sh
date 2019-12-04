@@ -27,4 +27,5 @@ cd  /usr/share/nginx/api
 make reload
 
 # Run Migration
+npm run migration:run
 #make migrate-prod
