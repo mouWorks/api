@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, Put, UsePipes} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { StyleDto } from './interfaces/styleDto';
 import { StyleRepository} from "./style.repository";
+import {StyleDTOValidationPipe} from "../shared/pipes/StyleDTOValidationPipe";
 
 @Controller('styles/v1')
 export class StyleController {
@@ -18,6 +19,7 @@ export class StyleController {
 
     //C
     @Post()
+    @UsePipes(StyleDTOValidationPipe)
     create(@Body() styleDto: StyleDto) {
         return this.styleRepository.createStyle(styleDto);
     }
