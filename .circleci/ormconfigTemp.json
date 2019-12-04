@@ -7,7 +7,7 @@
   "database": "mouWorks",
   "synchronize": true,
   "logging": false,
-  "migration_tables": "typeorm_migration",
+  "migrationsTableName": "typeorm_migration",
   "entities": [
     "dist/entity/**/*.js"
   ],
