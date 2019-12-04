@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Put, Delete, Param} from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, UsePipes} from '@nestjs/common';
 import { AppService } from './app.service';
+import { UserDTOValidationPipe } from "../shared/UserDTOValidationPipe";
+import { UserDTO} from "./UserDTO";
 
 @Controller()
 export class AppController {
@@ -12,8 +14,18 @@ export class AppController {
 
   //C
   @Post('/styles/v1')
-  create(): string {
-    return 'This is post';
+    @UsePipes(UserDTOValidationPipe)
+    create(@Body() userDto: UserDTO): string {
+
+    // data = new UserDTO();
+
+    // console.log(123154);
+    // console.log(data);
+    // console.log(data.username);
+
+    // return '123124';
+    return `使用者a:${userDto.username}已建立`;
+    // return 'This is post';
     // return this.appService.getHello();
   }
 
@@ -62,8 +74,8 @@ export class AppController {
 }
 
 
-export class UserDTO{
-  username: string;
-  email: string;
-}
+// export class UserDTO{
+//   username: string;
+//   email: string;
+// }
 
