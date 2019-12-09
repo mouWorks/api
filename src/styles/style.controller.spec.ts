@@ -16,10 +16,10 @@ describe('StyleController', () => {
     });
 
     describe('root', () => {
-        it('should return "Hello StyleController"', () => {
+        it('should return "Hello Test@StyleController"', () => {
 
             let res = styleController;
-            expect(styleController.getHello()).toBe('Hello StyleController');
+            expect(styleController.getHello()).toBe('Hello Test@StyleController');
 
         });
     });
