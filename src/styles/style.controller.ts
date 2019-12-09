@@ -19,8 +19,7 @@ export class StyleController {
     //Test
     @Get('/test')
     getHello(){
-        // return this.styleRepository.getHello();
-        return 'Hello StyleController';
+        return 'Hello Test@StyleController';
     }
 
     //C
