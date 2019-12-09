@@ -9,10 +9,5 @@ export class AppController {
   getHello(){
     return this.appService.getHello();
   }
-
-  // @Get('/health')
-  // healthCheck(){
-  //   return this.appService.healthCheck();
-  // }
 }
 

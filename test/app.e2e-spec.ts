@@ -16,7 +16,9 @@ describe('AppController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    // this.initTestingData();
     await app.init();
+    return initTestingData();
   });
 
   it('/ (GET)',  async () => {
@@ -27,38 +29,63 @@ describe('AppController (e2e)', () => {
       .expect('Hello NestJS @3005 001 !');
   });
 
-  // it('/ (POST) Style/v1', async () => {
-  //
-  //   let prepDataJson = {
-  //     "style": "Instrumental",
-  //     "desc": "Instrumental Music",
-  //     "descChinese": "純演奏音樂, 無人聲或歌詞",
-  //     "isDeleted": false
-  //   };
-  //
-  //   let postResult = await request(app.getHttpServer()).post('/style/v1');
-  //
-  //   expect(postResult).toBeDefined();
-  // });
+  it('/ (POST) Style/v1', async () => {
 
-  // it('/ (GET) Style/v1/2',   () => {
-  //
-  //   let resultJson = {
-  //     "id": 2,
-  //     "style": "Low-fi",
-  //     "desc": "Low-fi Music",
-  //     "descChinese": "放鬆音樂",
-  //     "isDeleted": false
-  //   };
-  //
-  //   return request(app.getHttpServer())
-  //       .get('/styles/v1/2')
-  //       .expect(200)
-  //       .expect(resultJson);
-  // });
+    let prepDataJson = {
+      "style": "Blues",
+      "desc": "BluesMusic",
+      "descChinese": "藍調音樂",
+    };
+
+    const response = await request(app.getHttpServer()).post('/styles/v1').send(prepDataJson);
+    expect(response.body).toEqual(expect.objectContaining(prepDataJson));
+  });
+
+  it('/ (GET) Style/v1/id',   async () => {
+
+    let resultJson = {
+      "style": "Low-fi",
+      "desc": "Low-fi Music",
+      "descChinese": "放鬆音樂",
+      "isDeleted": false
+    };
+
+    const response = await request(app.getHttpServer()).get('/styles/v1/1');
+    expect(response.body).toEqual(expect.objectContaining(resultJson));
+  });
 
   afterAll((done) => {
     app.close();
+    teardownData();
     done();
   });
+
+  it('/ (DELETE) Style/v1/id', async () => {
+
+    let desiredResult = {"affected": 1, "raw": {"affectedRows": 1, "changedRows": 0, "fieldCount": 0, "insertId": 0, "message": "", "protocol41": true, "serverStatus": 2, "warningCount": 0}};
+
+    const response = await request(app.getHttpServer()).delete('/styles/v1/1').send();
+    expect(200);
+    expect(response.body).toEqual(expect.objectContaining(desiredResult));
+  });
+
+  async function initTestingData(){
+    let resultJson = {
+      "style": "Low-fi",
+      "desc": "Low-fi Music",
+      "descChinese": "放鬆音樂",
+      "isDeleted": false
+    };
+
+    await request(app.getHttpServer()).post('/styles/v1').send(resultJson);
+  }
+
+  async function teardownData(){
+
+    // await request(app.getHttpServer()).post('/styles/v1').send();
+
+
+  }
+
+
 });
