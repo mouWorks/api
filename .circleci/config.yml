@@ -91,7 +91,7 @@ jobs:
 
       - run:
           name: Run Jest Test
-          command: jest && npm run test:e2e
+          command: jest
 
 # Shift to Prod-Code Here
 
