@@ -86,6 +86,10 @@ jobs:
           command: sudo npm install jest -g
 
       - run:
+          name: Npm install DEV Package (For Testing)
+          command: npm install --only=dev
+
+      - run:
           name: Run Jest Test
           command: jest && npm run test:e2e
 

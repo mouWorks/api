@@ -54,11 +54,23 @@ describe('AppController (e2e)', () => {
     expect(response.body).toEqual(expect.objectContaining(resultJson));
   });
 
-  afterAll((done) => {
-    app.close();
-    teardownData();
-    done();
+  it('/ (UPDATE) Style/v1/id',   async () => {
+
+    let updateData = {
+      "style": "RnB",
+      "desc": "RnB music",
+      "descChinese": "靈魂樂",
+      "isDeleted": false
+    };
+
+    let updateResult = {"generatedMaps": [], "raw": {"affectedRows": 1, "changedRows": 1, "fieldCount": 0, "insertId": 0, "message": "(Rows matched: 1  Changed: 1  Warnings: 0", "protocol41": true, "serverStatus": 2, "warningCount": 0}}
+
+    const response = await request(app.getHttpServer()).put('/styles/v1/1').send(updateData);
+    expect(response.body).toEqual(expect.objectContaining(updateResult));
   });
+
+
+
 
   it('/ (DELETE) Style/v1/id', async () => {
 
@@ -68,6 +80,13 @@ describe('AppController (e2e)', () => {
     expect(200);
     expect(response.body).toEqual(expect.objectContaining(desiredResult));
   });
+
+  afterAll((done) => {
+    app.close();
+    teardownData();
+    done();
+  });
+
 
   async function initTestingData(){
     let resultJson = {
@@ -82,8 +101,7 @@ describe('AppController (e2e)', () => {
 
   async function teardownData(){
 
-    // await request(app.getHttpServer()).post('/styles/v1').send();
-
+    console.log('here should deal with Teardown...');
 
   }
 
