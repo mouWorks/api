@@ -1,0 +1,25 @@
+version: '3'
+services:
+  api_redis:
+    container_name: api_redis
+    restart: always
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - api_docker_network
+  api_mysql:
+    container_name: api_mysql
+    restart: always
+    image: mariadb:10.3
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=circleci
+      - MYSQL_DATABASE=mouWorks
+    networks:
+      - api_docker_network
+
+networks:
+  api_docker_network:

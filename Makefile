@@ -7,7 +7,11 @@ CONFIG := ecosystem.config.js
 
 .PHONY: build
 
-build:
+container-build:
+	@echo ">>> Build Services (Docker Container)......"
+	docker-compose build --parallel
+
+build: container-build
 	@echo ">>> Builing packages"
 	npm i && npm run build
 
@@ -27,7 +31,10 @@ start:
 	@echo ">>> Starting Server"
 	npm run pm2
 
-local:
+docker-start:
+	docker-compose up -d --no-recreate
+
+local: docker-start
 	@echo ">>> Running Local env"
 	npm run start:dev
 
