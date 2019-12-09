@@ -32,7 +32,7 @@ export class StyleDto {
     @ApiProperty({
         maxLength: 80,
         description: "中文說明/DescChinese",
-        required: false
+        required: true
     })
     @Length(0, 80, { //可以指定錯誤訊息
         message: '中文說明需要小於80',

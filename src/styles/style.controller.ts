@@ -1,8 +1,8 @@
-import {Controller, Get, Post, Body, Param, Delete, Put, UsePipes} from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, Put, UsePipes, HttpCode} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { StyleDto } from './interfaces/styleDto';
 import { StyleRepository} from "./style.repository";
-import {StyleDTOValidationPipe} from "../shared/pipes/StyleDTOValidationPipe";
+import { StyleDTOValidationPipe } from "../shared/pipes/StyleDTOValidationPipe";
 import {
     ApiBadRequestResponse,
     ApiCreatedResponse,
@@ -40,6 +40,7 @@ export class StyleController {
         return this.styleRepository.find();
     }
 
+    // @HttpCode(308)
     //R - FindById
     @ApiOkResponse({description:'Return Styles Array By ID'})
     @Get(':id')
