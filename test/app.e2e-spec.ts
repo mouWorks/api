@@ -41,21 +41,21 @@ describe('AppController (e2e)', () => {
   //   expect(postResult).toBeDefined();
   // });
 
-  it('/ (GET) Style/v1/2',   () => {
-
-    let resultJson = {
-      "id": 2,
-      "style": "Low-fi",
-      "desc": "Low-fi Music",
-      "descChinese": "放鬆音樂",
-      "isDeleted": false
-    };
-
-    return request(app.getHttpServer())
-        .get('/styles/v1/2')
-        .expect(200)
-        .expect(resultJson);
-  });
+  // it('/ (GET) Style/v1/2',   () => {
+  //
+  //   let resultJson = {
+  //     "id": 2,
+  //     "style": "Low-fi",
+  //     "desc": "Low-fi Music",
+  //     "descChinese": "放鬆音樂",
+  //     "isDeleted": false
+  //   };
+  //
+  //   return request(app.getHttpServer())
+  //       .get('/styles/v1/2')
+  //       .expect(200)
+  //       .expect(resultJson);
+  // });
 
   afterAll((done) => {
     app.close();
