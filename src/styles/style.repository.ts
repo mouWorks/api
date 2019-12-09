@@ -18,7 +18,6 @@ export class StyleRepository extends Repository<Style> {
     //U
     updateStyle = async (id: string,styleDto: StyleDto) => {
         return this.update(id, styleDto);
-        // return this.save({ ...styleDto, id: Number(id) });
     };
 
     //D
@@ -26,5 +25,4 @@ export class StyleRepository extends Repository<Style> {
         await this.findOneOrFail(id);
         return this.delete(id);
     };
-
 }

@@ -48,12 +48,14 @@ export class StyleController {
     }
 
     //U
+    @ApiOkResponse({description:'Styles Update By ID'})
     @Put(':id')
     update(@Param('id') id: string, @Body() styleDto: StyleDto) {
         return this.styleRepository.updateStyle(id, styleDto);
     }
 
     //D
+    @ApiOkResponse({description:'Styles Deleted'})
     @Delete(':id')
     delete(@Param('id') id: string) {
         return this.styleRepository.deleteStyle(id);
