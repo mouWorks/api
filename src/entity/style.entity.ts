@@ -1,4 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Optional} from "@nestjs/common";
 
 @Entity()
 export class Style {

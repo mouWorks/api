@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { StyleDto } from './interfaces/styleDto';
 import { StyleRepository} from "./style.repository";
 import {StyleDTOValidationPipe} from "../shared/pipes/StyleDTOValidationPipe";
-import {ApiCreatedResponse, ApiOkResponse} from "@nestjs/swagger";
+import {ApiCreatedResponse, ApiInternalServerErrorResponse, ApiOkResponse} from "@nestjs/swagger";
 
 @Controller('styles/v1')
 export class StyleController {
@@ -19,6 +19,8 @@ export class StyleController {
     // }
 
     //C
+    @ApiCreatedResponse({description:'Styles Created'})
+    @ApiInternalServerErrorResponse({description:'Invalid Input'})
     @Post()
     @UsePipes(StyleDTOValidationPipe)
     create(@Body() styleDto: StyleDto) {
@@ -26,13 +28,14 @@ export class StyleController {
     }
 
     //R - FindAll
-    @ApiCreatedResponse({description:'User Created'})
+    @ApiOkResponse({description:'Return Styles Array'})
     @Get()
     findAll(){
         return this.styleRepository.find();
     }
 
     //R - FindById
+    @ApiOkResponse({description:'Return Styles Array By ID'})
     @Get(':id')
     findOne(@Param('id') id: string){
         return this.styleRepository.findOneStyle(id);
