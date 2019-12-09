@@ -3,7 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { StyleDto } from './interfaces/styleDto';
 import { StyleRepository} from "./style.repository";
 import {StyleDTOValidationPipe} from "../shared/pipes/StyleDTOValidationPipe";
-import {ApiCreatedResponse, ApiInternalServerErrorResponse, ApiOkResponse} from "@nestjs/swagger";
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiInternalServerErrorResponse,
+    ApiOkResponse
+} from "@nestjs/swagger";
 
 @Controller('styles/v1')
 export class StyleController {
@@ -11,16 +16,17 @@ export class StyleController {
         @InjectRepository(StyleRepository) private readonly styleRepository: StyleRepository,
     ) {}
 
-    // //Test
-    // @Get('/test')
-    // getHello(){
-    //     // return this.styleRepository.getHello();
-    //     return 'Hello StyleController';
-    // }
+    //Test
+    @Get('/test')
+    getHello(){
+        // return this.styleRepository.getHello();
+        return 'Hello StyleController';
+    }
 
     //C
     @ApiCreatedResponse({description:'Styles Created'})
-    @ApiInternalServerErrorResponse({description:'Invalid Input'})
+    @ApiBadRequestResponse({description:'Invalid Input'})
+    @ApiInternalServerErrorResponse({description: 'Server Error'})
     @Post()
     @UsePipes(StyleDTOValidationPipe)
     create(@Body() styleDto: StyleDto) {

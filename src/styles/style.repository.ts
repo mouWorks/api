@@ -17,7 +17,8 @@ export class StyleRepository extends Repository<Style> {
 
     //U
     updateStyle = async (id: string,styleDto: StyleDto) => {
-        return this.save({ ...styleDto, id: Number(id) });
+        return this.update(id, styleDto);
+        // return this.save({ ...styleDto, id: Number(id) });
     };
 
     //D

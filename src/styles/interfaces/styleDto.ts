@@ -35,7 +35,7 @@ export class StyleDto {
         required: false
     })
     @Length(0, 80, { //可以指定錯誤訊息
-        message: '中文說明需要小於八十',
+        message: '中文說明需要小於80',
     })
     descChinese: string;
 
