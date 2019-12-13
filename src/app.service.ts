@@ -9,6 +9,6 @@ export class AppService {
   }
 
   healthCheck(): string{
-    return "Healthy!";
+    return 'Healthy! 002';
   }
 }

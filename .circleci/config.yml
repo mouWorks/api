@@ -52,17 +52,11 @@ jobs:
           name: Show Current Location
           command: pwd
 
-#      - run:
-#          name: Just Run Migration command
-#          command: make migrate
-
       - run:
           name: Init MySQL
           command: |
             sudo apt-get update
             sudo apt install mysql-client
-#            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}';"
-#            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';"
 
       - run:
           name: Eject .Env file
@@ -81,34 +75,36 @@ jobs:
           name: Install Jest for Nodejs Testing
           command: sudo npm install jest -g
 
-      - run:
-          name: Npm install DEV Package (For Testing)
-          command: npm install --only=dev
+#      - run:
+#          name: Npm install DEV Package (For Testing)
+#          command: npm install --only=dev
 
       - run:
           name: CompileJS file on the fly
           command:
             npm run build
 
-      - run:
-          name: Run Jest Test
-          command: jest
-
-      # Experimental
+      # Migration
       - run:
           name: Run DB Migration in CI Env
           command: npm run migration:run
 
+      # Unit Test
+      - run:
+          name: Run Jest Test
+          command: jest
+
+      # End2End Test
       - run:
           name: Run End2End Test w/Jest
           command: npm run test:e2e
 
       # Production Env
       - run:
-          name: Use jQ to eject current image build number
+          name: Use jQ to inject Production Info
           command: jq '.username = env.DB_USER  | .password = env.DB_PASS ' ormconfig.json >  ormconfigPROD.json
 
-# Shift to Prod-Code Here
+# Switch to Prod-Code Here
 
       - run:
           name: Switch to Prod
@@ -116,10 +112,10 @@ jobs:
             rm ormconfig.json
             mv ormconfigPROD.json ormconfig.json
 
-      - run:
-          name: CompileJS file on the fly
-          command:
-            npm run build
+#      - run:
+#          name: CompileJS file on the fly
+#          command:
+#            npm run build
 
       - slack/notify:
           title: "[Deploying...] @ api.m0u.work"
