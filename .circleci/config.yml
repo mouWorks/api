@@ -86,6 +86,11 @@ jobs:
           command: npm install --only=dev
 
       - run:
+          name: CompileJS file on the fly
+          command:
+            npm run build
+
+      - run:
           name: Run Jest Test
           command: jest
 
