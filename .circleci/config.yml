@@ -12,6 +12,7 @@ jobs:
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: 'mouWorks'
+          MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: 'circleci'
           TZ: "Asia/Taipei"  # Set The TimeZone
 
@@ -22,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: Wait for DB to start
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 30s
+          command: dockerize -wait tcp://127.0.0.1:3306
       - add_ssh_keys:
           fingerprints:
             - "9e:b2:7d:7f:da:69:a4:7f:e6:a8:92:33:76:a1:31:e4" # DigitalOcean Manually created this key
@@ -60,8 +61,8 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt install mysql-client
-            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}';"
-            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';"
+#            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}';"
+#            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';"
 
       - run:
           name: Eject .Env file
@@ -74,12 +75,7 @@ jobs:
           command: |
             cp .circleci/ormconfigTemp.json ormconfig.json
 
-      # Production Env
-      - run:
-          name: Use jQ to eject current image build number
-          command: jq '.username = env.DB_USER  | .password = env.DB_PASS ' ormconfig.json >  ormconfigPROD.json
-
-# Should Run Jest Test Here
+      # Should Run Jest Test Here
 
       - run:
           name: Install Jest for Nodejs Testing
@@ -93,15 +89,7 @@ jobs:
           name: Run Jest Test
           command: jest
 
-# Shift to Prod-Code Here
-
-      - run:
-          name: Switch to Prod
-          command: |
-            rm ormconfig.json
-            mv ormconfigPROD.json ormconfig.json
-
-# Experimental
+      # Experimental
       - run:
           name: Run DB Migration in CI Env
           command: npm run migration:run
@@ -109,6 +97,19 @@ jobs:
       - run:
           name: Run End2End Test w/Jest
           command: npm run test:e2e
+
+      # Production Env
+      - run:
+          name: Use jQ to eject current image build number
+          command: jq '.username = env.DB_USER  | .password = env.DB_PASS ' ormconfig.json >  ormconfigPROD.json
+
+# Shift to Prod-Code Here
+
+      - run:
+          name: Switch to Prod
+          command: |
+            rm ormconfig.json
+            mv ormconfigPROD.json ormconfig.json
 
       - run:
           name: CompileJS file on the fly
