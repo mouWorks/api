@@ -56,12 +56,12 @@ jobs:
 #          command: make migrate
 
       - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
+          name: Init MySQL in CI Env (Use CI user)
           command: |
             sudo apt-get update
             sudo apt install mysql-client
-            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}';"
-            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';"
+            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
+            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
 
       - run:
           name: Eject .Env file
