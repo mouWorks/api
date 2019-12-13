@@ -56,12 +56,12 @@ jobs:
 #          command: make migrate
 
       - run:
-          name: Init MySQL in CI Env (Use CI user)
+          name: Init MySQL
           command: |
             sudo apt-get update
             sudo apt install mysql-client
-            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
-            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
+            mysql -h 127.0.0.1 -u root -pcircleci --execute="CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}';"
+            mysql -h 127.0.0.1 -u root -pcircleci --execute="GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';"
 
       - run:
           name: Eject .Env file
@@ -93,14 +93,6 @@ jobs:
           name: Run Jest Test
           command: jest
 
-      - run:
-          name: Run DB Migration in CI Env
-          command: npm run migration:run
-
-      - run:
-          name: Run End2End Test w/Jest
-          command: npm run test:e2e
-
 # Shift to Prod-Code Here
 
       - run:
@@ -108,6 +100,15 @@ jobs:
           command: |
             rm ormconfig.json
             mv ormconfigPROD.json ormconfig.json
+
+# Experimental
+      - run:
+          name: Run DB Migration in CI Env
+          command: npm run migration:run
+
+      - run:
+          name: Run End2End Test w/Jest
+          command: npm run test:e2e
 
       - run:
           name: CompileJS file on the fly
