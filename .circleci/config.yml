@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run:
           name: Wait for DB to start
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 30s
       - add_ssh_keys:
           fingerprints:
             - "9e:b2:7d:7f:da:69:a4:7f:e6:a8:92:33:76:a1:31:e4" # DigitalOcean Manually created this key
@@ -90,11 +90,15 @@ jobs:
           command: npm install --only=dev
 
       - run:
+          name: Run Jest Test
+          command: jest
+
+      - run:
           name: Run DB Migration in CI Env
           command: npm run migration:run
 
       - run:
-          name: Run Jest Test
+          name: Run End2End Test w/Jest
           command: jest
 
 # Shift to Prod-Code Here
