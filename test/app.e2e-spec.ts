@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import {TypeOrmModule} from "@nestjs/typeorm";
+import {TypeOrmModule} from '@nestjs/typeorm';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -31,7 +31,7 @@ describe('AppController (e2e)', () => {
 
   it('/ (POST) Style/v1', async () => {
 
-    let prepDataJson = {
+    const prepDataJson = {
       "style": "Blues",
       "desc": "BluesMusic",
       "descChinese": "藍調音樂",
@@ -43,7 +43,7 @@ describe('AppController (e2e)', () => {
 
   it('/ (GET) Style/v1/id',   async () => {
 
-    let resultJson = {
+    const resultJson = {
       "style": "Low-fi",
       "desc": "Low-fi Music",
       "descChinese": "放鬆音樂",
