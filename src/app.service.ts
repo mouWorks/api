@@ -9,6 +9,6 @@ export class AppService {
   }
 
   healthCheck(): string{
-    return 'Healthy! 002';
+    return 'Healthy! 003 @LightSail Yo !';
   }
 }
