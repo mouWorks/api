@@ -140,7 +140,7 @@ jobs:
 
       - run:
           name: Make the Update
-          command: ssh ubuntu@${PRODUCTION_SERVER} " cd /tmp && chmod +x circleci_update.sh && ./circleci_update.sh "
+          command: ssh ubuntu@${PRODUCTION_SERVER} " cd /tmp && sudo chmod +x circleci_update.sh && sudo ./circleci_update.sh "
 
       - slack/status:
           fail_only: true
