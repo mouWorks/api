@@ -26,7 +26,8 @@ jobs:
           command: dockerize -wait tcp://127.0.0.1:3306
       - add_ssh_keys:
           fingerprints:
-            - "9e:b2:7d:7f:da:69:a4:7f:e6:a8:92:33:76:a1:31:e4" # DigitalOcean Manually created this key
+            - "01:65:57:f8:9b:34:4a:04:83:0d:8a:41:c4:42:0f:c1" # AWS LightSail @20191227
+#            - "9e:b2:7d:7f:da:69:a4:7f:e6:a8:92:33:76:a1:31:e4" # DigitalOcean Manually created this key
 
       - slack/notify:
           title: "[Npm Installing] @ api.m0u.work"
