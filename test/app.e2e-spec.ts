@@ -26,7 +26,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello NestJS @3005 001 !');
+      .expect('Hello NestJS @3005 001 @LightSail !');
   });
 
   it('/ (POST) Style/v1', async () => {

@@ -5,7 +5,7 @@ SERVICE_NAME := api
 PORT := 3005
 CONFIG := ecosystem.config.js
 
-.PHONY: build
+.PHONY: build test
 
 container-build:
 	@echo ">>> Build Services (Docker Container)......"
@@ -41,6 +41,10 @@ local: docker-start
 pull:
 	@echo ">>> Pull Code on Current branch [$(BRANCH)]"
 	git pull origin $(BRANCH) --rebase
+
+test:
+	@echo ">>> Jest and e2e Test"
+	jest && npm run test:e2e
 
 push: validate-yaml
 	@echo ">>> Current branch [$(BRANCH)] Pushing Code"
