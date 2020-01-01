@@ -17,6 +17,10 @@ export class StyleModule implements NestModule{
     configure(consumer: MiddlewareConsumer) {
         consumer
             .apply(SimpleBlocker)
-            .forRoutes({path: 'styles/v1', method: RequestMethod.POST});
+            .forRoutes(
+                {path: 'styles/v1', method: RequestMethod.POST}, //CREATE
+                {path: 'styles/v1', method: RequestMethod.PUT}, //UPDATE
+                {path: 'styles/v1/*', method: RequestMethod.DELETE}  //DELETE
+        )
     }
 }
