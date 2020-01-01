@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { StyleController } from './style.controller';
-import {AppService} from "../app.service";
 import {StyleRepository} from "./style.repository";
 
 describe('StyleController', () => {

@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { StyleModule } from './styles/style.modules';
+import { EasyconfigModule } from  'nestjs-easyconfig';
 
 @Module({
   imports: [
       // SharedModule
       TypeOrmModule.forRoot(),
       StyleModule,
+      EasyconfigModule.register({path: './src/.env'})
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController]
 })
 export class AppModule {}

@@ -1,17 +1,23 @@
 import { Controller, Get} from '@nestjs/common';
-import { AppService } from './app.service';
+import { EasyconfigService } from "nestjs-easyconfig";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  // constructor(private readonly appService: AppService) {}
+  constructor (private config: EasyconfigService) {}
 
   @Get()
   getHello(){
-    return this.appService.getHello();
+    return 'Hello NestJS @3005 001 @LightSail !';
   }
 
   @Get('/healthy')
   getHealth() {
-    return this.appService.healthCheck();
+    return 'NestJS healthy @ AWS LightSail';
+  }
+
+  @Get('/try')
+  testMagic(){
+    return this.config.get('MAGIC_WORD');
   }
 }
