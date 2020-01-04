@@ -5,7 +5,7 @@ import {ConfigService} from "nestjs-dotenv";
 export class AppController {
   // constructor(private readonly appService: AppService) {}
   // constructor(private config: EasyconfigService) {}
-  constructor(private config: ConfigService) {}
+  // constructor(private config: ConfigService) {}
 
   @Get()
   getHello() {
@@ -17,8 +17,8 @@ export class AppController {
     return 'NestJS healthy @ AWS LightSail';
   }
 
-  @Get('/try')
-  testMagic(){
-    return this.config.get('MAGIC_WORD');
-  }
+  // @Get('/try')
+  // testMagic(){
+  //   return this.config.get('MAGIC_WORD');
+  // }
 }

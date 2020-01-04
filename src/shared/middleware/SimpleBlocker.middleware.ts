@@ -23,5 +23,6 @@ export class SimpleBlocker implements NestMiddleware{
                 next();
             }
         }
+        next();
     }
 }

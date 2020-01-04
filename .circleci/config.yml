@@ -62,7 +62,7 @@ jobs:
       - run:
           name: Eject .Env file
           command:
-            echo -e "DB_USER=${DB_USER}\nDB_PASS=${DB_PASS}\nDB_NAME=${DB_NAME}\nCHATROOM_ID=${CHATROOM_ID}\n}" > .env
+            echo -e "DB_USER=${DB_USER}\nDB_PASS=${DB_PASS}\nDB_NAME=${DB_NAME}\nCHATROOM_ID=${CHATROOM_ID}\nMAGIC_WORD=${MAGIC_WORD}\nNODE_ENV=CI" > .env
 
       # CircleCI Env
       - run:
@@ -102,8 +102,10 @@ jobs:
 
       # Production Env
       - run:
-          name: Use jQ to inject Production Info
-          command: jq '.username = env.DB_USER  | .password = env.DB_PASS ' ormconfig.json >  ormconfigPROD.json
+          name: Use jQ to inject Production Info | Modify Env value for PROD
+          command: |
+            jq '.username = env.DB_USER  | .password = env.DB_PASS ' ormconfig.json >  ormconfigPROD.json
+            echo 'NODE_ENV=PROD' > .env
 
 # Switch to Prod-Code Here
 
