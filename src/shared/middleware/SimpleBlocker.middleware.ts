@@ -11,7 +11,7 @@ export class SimpleBlocker implements NestMiddleware{
     use(req: Request, res: Response, next: () => void) {
 
         const env = this.config.get('NODE_ENV');
-        if ((env !== undefined) && env === 'local'){
+        if ((env !== undefined) && env === 'PROD'){
             const magic_word = this.config.get('MAGIC_WORD');
             if(req.body['magic_word'] == undefined){
                 throw new UnauthorizedException('No magic word!');
