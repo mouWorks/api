@@ -105,7 +105,7 @@ jobs:
           name: Use jQ to inject Production Info | Modify Env value for PROD
           command: |
             jq '.username = env.DB_USER  | .password = env.DB_PASS ' ormconfig.json >  ormconfigPROD.json
-            echo 'NODE_ENV=PROD' > .env
+            sed -i '' "s/CI/PROD/g" .env
 
 # Switch to Prod-Code Here
 
