@@ -87,7 +87,6 @@ describe('AppController (e2e)', () => {
     done();
   });
 
-
   async function initTestingData(){
     let resultJson = {
       "style": "Low-fi",
@@ -104,6 +103,5 @@ describe('AppController (e2e)', () => {
     console.log('here should deal with Teardown...');
 
   }
-
 
 });

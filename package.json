@@ -35,6 +35,7 @@
     "@types/passport-jwt": "^3.0.3",
     "class-transformer": "latest",
     "class-validator": "latest",
+    "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.17.1",
     "nestjs-easyconfig": "^1.7.0",

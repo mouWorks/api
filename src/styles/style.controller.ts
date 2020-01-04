@@ -1,14 +1,14 @@
 import {Controller, Get, Post, Body, Param, Delete, Put, UsePipes, HttpCode} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { StyleDto } from './interfaces/styleDto';
-import { StyleRepository} from "./style.repository";
-import { StyleDTOValidationPipe } from "../shared/pipes/StyleDTOValidationPipe";
+import { StyleRepository} from './style.repository';
+import { StyleDTOValidationPipe } from '../shared/pipes/StyleDTOValidationPipe';
 import {
     ApiBadRequestResponse,
     ApiCreatedResponse,
     ApiInternalServerErrorResponse,
-    ApiOkResponse
-} from "@nestjs/swagger";
+    ApiOkResponse,
+} from '@nestjs/swagger';
 
 @Controller('styles/v1')
 export class StyleController {
@@ -16,15 +16,15 @@ export class StyleController {
         @InjectRepository(StyleRepository) private readonly styleRepository: StyleRepository,
     ) {}
 
-    //Test
+    // Test
     @Get('/test')
     getHello(){
         return 'Hello Test@StyleController';
     }
 
-    //C
-    @ApiCreatedResponse({description:'Styles Created'})
-    @ApiBadRequestResponse({description:'Invalid Input'})
+    // C
+    @ApiCreatedResponse({description: 'Styles Created'})
+    @ApiBadRequestResponse({description: 'Invalid Input'})
     @ApiInternalServerErrorResponse({description: 'Server Error'})
     @Post()
     @UsePipes(StyleDTOValidationPipe)
@@ -32,30 +32,30 @@ export class StyleController {
         return this.styleRepository.createStyle(styleDto);
     }
 
-    //R - FindAll
-    @ApiOkResponse({description:'Return Styles Array'})
+    // R - FindAll
+    @ApiOkResponse({description: 'Return Styles Array'})
     @Get()
-    findAll(){
+    findAll() {
         return this.styleRepository.find();
     }
 
     // @HttpCode(308)
-    //R - FindById
-    @ApiOkResponse({description:'Return Styles Array By ID'})
+    // R - FindById
+    @ApiOkResponse({description: 'Return Styles Array By ID'})
     @Get(':id')
     findOne(@Param('id') id: string){
         return this.styleRepository.findOneStyle(id);
     }
 
-    //U
-    @ApiOkResponse({description:'Styles Update By ID'})
+    // U
+    @ApiOkResponse({description: 'Styles Update By ID'})
     @Put(':id')
     update(@Param('id') id: string, @Body() styleDto: StyleDto) {
         return this.styleRepository.updateStyle(id, styleDto);
     }
 
-    //D
-    @ApiOkResponse({description:'Styles Deleted'})
+    // D
+    @ApiOkResponse({description: 'Styles Deleted'})
     @Delete(':id')
     delete(@Param('id') id: string) {
         return this.styleRepository.deleteStyle(id);
