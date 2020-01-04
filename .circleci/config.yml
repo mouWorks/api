@@ -101,11 +101,13 @@ jobs:
           command: npm run test:e2e
 
       # Production Env
+      # Note that Sed command is different on Mac and ubuntu
       - run:
           name: Use jQ to inject Production Info | Modify Env value for PROD
           command: |
             jq '.username = env.DB_USER  | .password = env.DB_PASS ' ormconfig.json >  ormconfigPROD.json
-            sed -i '' "s/CI/PROD/g" .env
+            sed -i "s/CI/PROD/g" .env
+
 
 # Switch to Prod-Code Here
 
