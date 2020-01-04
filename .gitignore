@@ -38,4 +38,4 @@ lerna-debug.log*
 ormconfig.json
 ormconfigPROD.json
 
-src/.env
+.env

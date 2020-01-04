@@ -1,5 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {StyleModule} from "./styles/style.modules";
+import {ConfigModule} from "nestjs-dotenv";
 
 describe('AppController', () => {
   let appController: AppController;
@@ -7,6 +10,9 @@ describe('AppController', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
+      imports: [
+        ConfigModule.forRoot( ), //this is used, so also needs to required
+      ],
     }).compile();
 
     appController = app.get<AppController>(AppController);

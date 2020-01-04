@@ -4,15 +4,16 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {Style} from '../entity/style.entity';
 import {StyleRepository} from './style.repository';
 import {SimpleBlocker} from '../shared/middleware/SimpleBlocker.middleware';
-import {EasyconfigModule} from 'nestjs-easyconfig';
+import {ConfigModule} from "nestjs-dotenv";
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([Style, StyleRepository]),
-        EasyconfigModule.register({path: './src/.env'}),
+        ConfigModule.forRoot(),
     ],
     controllers: [StyleController],
 })
+
 export class StyleModule implements NestModule{
     configure(consumer: MiddlewareConsumer) {
         consumer

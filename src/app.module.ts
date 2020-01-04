@@ -2,14 +2,15 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { StyleModule } from './styles/style.modules';
-import { EasyconfigModule } from  'nestjs-easyconfig';
+import { ConfigModule } from 'nestjs-dotenv';
 
 @Module({
+
   imports: [
       // SharedModule
       TypeOrmModule.forRoot(),
       StyleModule,
-      EasyconfigModule.register({path: './src/.env'})
+      ConfigModule.forRoot( ),
   ],
   controllers: [AppController]
 })
